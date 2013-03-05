@@ -6,17 +6,17 @@ class CopycatTranslation < ActiveRecord::Base
 
   validates :key, :presence => true
   validates :locale, :presence => true
-  
+
   attr_accessible :locale, :key, :value
 
   module Serialize
-   
+
     def import_yaml(yaml)
       hash = YAML.load(yaml)
       hash.each do |locale, data|
         hash_flatten(data).each do |key, value|
           c = where(key: key, locale: locale).first
-          c ||= new(key: key, locale: locale) 
+          c ||= new(key: key, locale: locale)
           c.value = value
           c.save
         end
@@ -31,14 +31,14 @@ class CopycatTranslation < ActiveRecord::Base
       end
       hash.to_yaml
     end
-    
+
     # {"foo"=>{"a"=>"1", "b"=>"2"}} ----> {"foo.a"=>1, "foo.b"=>2}
     def hash_flatten(hash)
-      result = {} 
+      result = {}
       hash.each do |key, value|
-        if value.is_a? Hash 
+        if value.is_a? Hash
           hash_flatten(value).each { |k,v| result["#{key}.#{k}"] = v }
-        else 
+        else
           result[key] = value
         end
       end

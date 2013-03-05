@@ -4,7 +4,7 @@ require 'spec_helper'
 
 
 feature "copycat index" do
- 
+
   before do
     FactoryGirl.create(:copycat_translation, :key => "foo", :value => "bar")
     page.driver.browser.basic_authorize Copycat.username, Copycat.password
@@ -49,7 +49,7 @@ feature "copycat index" do
     page.should_not have_content 'foo'
     page.should_not have_content 'bar'
   end
-  
+
   it "searches in the middles of strings" do
     FactoryGirl.create(:copycat_translation, :key => "site.index.something")
     fill_in 'search', :with => 'index'
@@ -250,11 +250,12 @@ feature "downloading and uploading yaml files" do
     assert CopycatTranslation.count == 5
 
     visit import_export_copycat_translations_path
+
     click_link 'Download as YAML'
     CopycatTranslation.destroy_all
     assert CopycatTranslation.count == 0
 
-    yaml = page.text
+    yaml = page.source
     file = Tempfile.new 'copycat'
     file.write yaml
     file.close
@@ -280,7 +281,7 @@ feature "downloading and uploading yaml files" do
     click_link 'Download as YAML'
     CopycatTranslation.destroy_all
 
-    yaml = page.text
+    yaml = page.source
     file = Tempfile.new 'copycat'
     file.write yaml
     file.close
@@ -343,9 +344,9 @@ feature "locales" do
     FactoryGirl.create(:copycat_translation, locale: 'es', key: 'hello', value: 'mundo')
 
     visit download_copycat_translations_path
-    yaml = page.text
+    yaml = page.source
     assert yaml =~ /en:\s*hello: world/
-    assert yaml =~ /es:\s*hello: mundo/  
+    assert yaml =~ /es:\s*hello: mundo/
   end
 
 end
