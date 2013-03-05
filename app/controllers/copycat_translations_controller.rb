@@ -1,5 +1,5 @@
 class CopycatTranslationsController < ActionController::Base
-  
+
   http_basic_authenticate_with :name => Copycat.username, :password => Copycat.password
 
   layout 'copycat'
@@ -26,7 +26,7 @@ class CopycatTranslationsController < ActionController::Base
   def edit
     @copycat_translation = CopycatTranslation.find(params[:id])
   end
-  
+
   def update
     @copycat_translation = CopycatTranslation.find(params[:id])
     @copycat_translation.value = params[:copycat_translation][:value]
