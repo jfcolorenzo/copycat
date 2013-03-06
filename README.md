@@ -1,6 +1,4 @@
-# Copycat #
-
-[![Build Status](https://travis-ci.org/Zorros/copycat.png)](https://travis-ci.org/Zorros/copycat)
+# Copycat [![Build Status](https://travis-ci.org/Zorros/copycat.png)](https://travis-ci.org/Zorros/copycat)#
 
 Copycat is a Rails engine that allows users to edit live website copy.
 
