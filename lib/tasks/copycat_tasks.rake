@@ -16,6 +16,7 @@ Copycat.setup do |config|
   config.username = '#{username}'
   config.password = '#{password}'
   #config.route = 'copycat_translations'
+  #config.everything_is_html_safe = true
 end
 CONFIG
     end

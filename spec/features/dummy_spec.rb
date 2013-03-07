@@ -34,6 +34,15 @@ feature "use #t" do
     page.should have_content 'A different header'
   end
 
+  it "allows to treat every translation as html safe" do
+    FactoryGirl.create(:copycat_translation, key: 'site.index.header', value: '<strong>Strong header</strong>')
+    visit root_path
+    page.should have_content '<strong>Strong header</strong>'
+    Copycat.everything_is_html_safe = true
+    visit root_path
+    page.should_not have_content '<strong>Strong header</strong>'
+    page.should have_content 'Strong header'
+  end
 end
 
 feature "locales" do
