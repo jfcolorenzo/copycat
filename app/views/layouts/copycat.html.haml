@@ -1,0 +1,18 @@
+!!!
+%html
+  %head
+    %title Copycat
+    = stylesheet_link_tag "copycat_engine", :media => "all"
+    %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-Type"}/
+  %body
+    #page
+      #header
+        %h1 Copycat
+        %ul
+          %li= link_to "Search", copycat_translations_path
+          %li= link_to "Import / Export", import_export_copycat_translations_path
+          %li= link_to "Help", help_copycat_translations_path
+      - if notice
+        #notice
+          = notice
+      = yield

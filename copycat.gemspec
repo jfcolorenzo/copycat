@@ -15,4 +15,5 @@ Gem::Specification.new do |s|
   s.test_files = Dir["spec/**/*"]
 
   s.add_dependency(%q<rails>, [">= 3.1.0"])
+  s.add_dependency(%q<haml-rails>)
 end

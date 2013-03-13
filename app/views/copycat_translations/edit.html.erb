@@ -1,9 +1,0 @@
-<div class="edit">
-  <h2><%= @copycat_translation.key%></h2>
-  <%= button_to "Delete this item", copycat_translation_path(@copycat_translation), :method => :delete, :onclick => "return confirm('Are you sure?');" %>
-  <%= form_for @copycat_translation, :url => { :action => "update" } do |f| %>
-    <%= f.text_area :value, :rows => 12 %>
-    <%= f.submit "Update" %>
-  <% end %>
-  <%= link_to "Cancel", copycat_translations_path %>
-</div>
