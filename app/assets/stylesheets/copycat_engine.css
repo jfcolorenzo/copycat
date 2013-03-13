@@ -453,19 +453,18 @@ body {
   padding: 0 .5em 0 .5em;
 }
 
-#notice {
-  height: 2em;
+.notice {
+  min-height: 2em;
   background-color: #FFD;
   text-align: center;
   padding-top: .5em;
   margin-bottom: .5em;
 }
 
-#alert {
-  height: 2em;
+.alert {
+  min-height: 2em;
   background-color: #FDD;
   text-align: center;
   padding-top: .5em;
   margin-bottom: .5em;
 }
-
