@@ -461,3 +461,11 @@ body {
   margin-bottom: .5em;
 }
 
+#alert {
+  height: 2em;
+  background-color: #FDD;
+  text-align: center;
+  padding-top: .5em;
+  margin-bottom: .5em;
+}
+

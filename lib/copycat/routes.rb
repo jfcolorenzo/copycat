@@ -8,6 +8,7 @@ module Copycat
         collection do
           get 'help'
           get 'import_export'
+          get 'sync'
           get 'download'
           post 'upload'
         end

@@ -63,4 +63,35 @@ class CopycatTranslationsController < ActionController::Base
 
   def help
   end
+
+  def sync
+    if Copycat.staging_server_endpoint.nil?
+      redirect_to :back, alert: 'You didn\'t set your source server'
+    else
+      yaml = read_remote_yaml(Copycat.staging_server_endpoint)
+
+      if yaml
+        CopycatTranslation.import_yaml(yaml)
+        redirect_to :back, notice: "Translations synced from source server"
+      else
+        redirect_to :back
+      end
+
+    end
+  end
+
+  protected
+
+  def read_remote_yaml(url)
+    output = nil
+    begin
+      open(url, http_basic_authentication: [Copycat.username, Copycat.password]) do |remote|
+        output = remote.read()
+      end
+    rescue Exception => e
+      logger.fatal e
+      flash[:alert] = "Syncing failed: #{e}"
+    end
+    output
+  end
 end

@@ -17,6 +17,7 @@ Copycat.setup do |config|
   config.password = '#{password}'
   #config.route = 'copycat_translations'
   #config.everything_is_html_safe = true
+  #config.staging_server_endpoint = "http://staging.yourapp.com/copycat_translations/download"
 end
 CONFIG
     end

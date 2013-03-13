@@ -99,3 +99,52 @@ feature "yaml" do
   end
 
 end
+
+feature "automatic deployment" do
+  before do
+    page.driver.browser.basic_authorize Copycat.username, Copycat.password
+  end
+
+  it "shouldn't show the syncing button if no staging_server_endpoint is set" do
+    visit import_export_copycat_translations_path
+    page.should_not have_content('Sync from staging server')
+  end
+
+  it "shouldn't show the syncing button in staging" do
+    Copycat.staging_server_endpoint = "nothing"
+
+    Rails.env = "staging"
+    visit import_export_copycat_translations_path
+    page.should_not have_content('Sync from staging server')
+
+    %w[production development test].each do |env|
+      Rails.env = env
+      visit import_export_copycat_translations_path
+      page.should have_content('Sync from staging server')
+    end
+  end
+
+  it "should allow to sync translations from the source server when it is set" do
+    Copycat.staging_server_endpoint = "nothing"
+    CopycatTranslationsController.any_instance.stub(:read_remote_yaml).and_return <<-EOF
+---
+es:
+  first_key: "Primera clave"
+  second_key: "Segunda clave"
+en:
+  first_key: "First key"
+  second_key: "Second key"
+  third_key: "Third key"
+EOF
+
+    visit import_export_copycat_translations_path
+
+    click_link 'Sync from staging server'
+
+    page.should have_content('Translations synced from source server')
+
+    CopycatTranslation.find_all_by_key('first_key').count.should eq(2)
+    CopycatTranslation.find_all_by_key('second_key').count.should eq(2)
+    CopycatTranslation.find_all_by_key('third_key').count.should eq(1)
+  end
+end

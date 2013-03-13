@@ -311,7 +311,6 @@ end
 
 feature "locales" do
   before do
-
     page.driver.browser.basic_authorize Copycat.username, Copycat.password
   end
 

@@ -8,6 +8,7 @@ module Copycat
   mattr_accessor :password
   mattr_accessor :route
   mattr_accessor :everything_is_html_safe
+  mattr_accessor :staging_server_endpoint
 
   @@route = 'copycat_translations'
   @@everything_is_html_safe = false
