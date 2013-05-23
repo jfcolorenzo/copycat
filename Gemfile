@@ -4,6 +4,6 @@ gemspec
 gem 'sqlite3'
 gem 'rspec-rails'
 gem 'factory_girl_rails'
-gem 'capybara'
+gem 'capybara', '~> 2.0'
 gem 'haml-rails'
 
