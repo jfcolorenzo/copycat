@@ -1,5 +1,6 @@
 language: ruby
 rvm:
+  - 2.0.0
   - 1.9.3
   - 1.9.2
 before_script: cd spec/dummy && rake copycat:install db:create db:migrate db:test:prepare && cd ../..
