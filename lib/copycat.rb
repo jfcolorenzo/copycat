@@ -24,15 +24,12 @@ module ActionView
       private
 
       def new_html_safe_translation_key?(key)
-        if Copycat.everything_is_html_safe
-          true
-        else
-          old_html_safe_translation_key?(key)
-        end
+        Copycat.everything_is_html_safe || old_html_safe_translation_key?(key)
       end
 
       alias_method :old_html_safe_translation_key?, :html_safe_translation_key?
       alias_method :html_safe_translation_key?, :new_html_safe_translation_key?
+
     end
   end
 end
