@@ -6,7 +6,14 @@ module Copycat
 
       scoped_key = I18n.normalize_keys(nil, key, scope, options[:separator]).join(".")
 
-      cct = CopycatTranslation.where(locale: locale.to_s, key: scoped_key).first
+      cct = if Copycat.use_cache
+        Rails.cache.fetch("_cc_#{locale.to_s}_#{scoped_key}") do
+          CopycatTranslation.where(locale: locale.to_s, key: scoped_key).first
+        end
+      else
+        CopycatTranslation.where(locale: locale.to_s, key: scoped_key).first
+      end
+
       return cct.value if cct
 
       value = super(locale, key, scope, options)
