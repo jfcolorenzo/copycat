@@ -33,7 +33,7 @@ module Copycat
     private
 
     def log_copycat_keys(locale, key, scope, options, scoped_key, cct)
-      return unless Rails.env.development? || Rails.env.staging?
+      return unless Rails.env.staging?
       return if scope == :'simple_form.labels'
       Rails.logger.info("Translation key: \e[0;32m#{scoped_key}\033[0m, Locale: '#{locale.to_s}', Value: \"#{cct.value}\", edit: \e[0;34m#{Rails.application.routes.url_helpers.edit_copycat_translation_url(cct)}\033[0m")
     end
