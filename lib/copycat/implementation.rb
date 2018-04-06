@@ -33,7 +33,7 @@ module Copycat
     private
 
     def log_copycat_keys(locale, key, scope, options, scoped_key, cct)
-      return unless Rails.env.staging?
+      return # unless Rails.env.staging?
       Rails.logger.info "CC-KEY: ------- value: \"#{cct.value.nil? ? '' : cct.value[0...40]}\" "
       Rails.logger.info("CC-KEY: \e[0;32m#{scoped_key}\033[0m '#{locale.to_s}'")
       Rails.logger.info("CC-KEY: edit: \e[0;34m#{Rails.application.routes.url_helpers.edit_copycat_translation_url(cct)}\033[0m")
