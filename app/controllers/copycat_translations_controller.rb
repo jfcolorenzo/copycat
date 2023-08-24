@@ -20,7 +20,7 @@ class CopycatTranslationsController < ActionController::Base
     else
       @copycat_translations = []
     end
-    @locale_names = CopycatTranslation.find(:all, select: 'distinct locale').map(&:locale)
+    @locale_names = CopycatTranslation.select('distinct locale').to_a.map(&:locale)
   end
 
   def edit
